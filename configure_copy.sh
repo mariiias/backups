@@ -10,7 +10,7 @@ show_usage() {
     echo "  <source_path>: The directory to be backed up."
 }
 
-if [ "#" -ne 2 ]; then
+if [ "#" -lt 2 ]; then
     echo "Error: Wrong number of arguments"
     show_usage
     exit 1
@@ -18,6 +18,7 @@ fi
 
 DEST_PATH=$1
 SOURCE_PATH=$2
+S3_BUCKET="mao-backups-2025"
 
 if [ ! -d "$SOURCE_PATH" ]; then
     echo "Warning: Source directory '$SOURCE_PATH' does not exist."
