@@ -7,7 +7,7 @@
 CONFIG_FILE="$HOME/.conf_copia_seg.txt"
 
 
-if [ ! -d "$CONFIG_FILE"]; then
+if [ ! -f "$CONFIG_FILE" ]; then
     # Exit silently if directory is not found.
     exit 0
 fi
@@ -58,3 +58,24 @@ if [ -n "$S3_BUCKET" ]; then
 else
     echo "Info: La variable S3_BUCKET no está configurada. Se omite la subida a S3."
 fi
+
+
+echo "Realizando limpieza de copias antiguas..."
+
+# Mantener las últimas 4 copias DIARIAS
+# tail -n +5 significa "empezar a mostrar desde la 5ª línea", es decir, borrar el 5º, 6º, ... más antiguos.
+find "$DESTINATION_DIR" -maxdepth 1 -name "*_copia_diaria.tar.gz" -type f | sort -r | tail -n +5 | xargs -r rm
+echo "-> Limpieza de copias diarias completada."
+
+# Mantener las últimas 3 copias SEMANALES
+# tail -n +4 significa "empezar desde la 4ª línea".
+find "$DESTINATION_DIR" -maxdepth 1 -name "*_copia_semanal.tar.gz" -type f | sort -r | tail -n +4 | xargs -r rm
+echo "-> Limpieza de copias semanales completada."
+
+# Mantener las últimas 12 copias MENSUALES
+# tail -n +13 significa "empezar desde la 13ª línea".
+find "$DESTINATION_DIR" -maxdepth 1 -name "*_copia_mensual.tar.gz" -type f | sort -r | tail -n +13 | xargs -r rm
+echo "-> Limpieza de copias mensuales completada."
+
+echo "Proceso de backup y rotación finalizado."
+echo # Línea en blanco para separar las ejecuciones en el log

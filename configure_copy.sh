@@ -38,10 +38,14 @@ fi
 
 echo "DESTINATION_DIR=\"$DEST_PATH\"" > "$CONFIG_FILE"
 echo "SOURCE_DIR=\"$SOURCE_PATH\"" >> "$CONFIG_FILE"
+echo "S3_BUCKET=\"$S3_BUCKET\"" >> "$CONFIG_FILE"
+
 
 echo "--------------------------------------------------"
 echo "Configuration saved successfully to $CONFIG_FILE"
 echo "--------------------------------------------------"
 echo "Source Directory:      $SOURCE_PATH"
 echo "Destination Directory: $DEST_PATH"
+echo "AWS Bucket: $S3_BUCKET"
+
 echo
