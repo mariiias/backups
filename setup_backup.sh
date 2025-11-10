@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG_FILE="$HOME/.conf_copia_seg.txt"
+CONFIG_FILE="$HOME/.backup_conf.txt"
 
 show_usage() {
     echo "Usage: $0 <destination_path> <source_path>"
